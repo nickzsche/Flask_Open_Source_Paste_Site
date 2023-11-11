@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ubuntu Paste Site</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Ubuntu Paste Site</h1>
+        <form action="/" method="get">
+            <input type="text" name="search" placeholder="Search">
+            <select name="order">
+                <option value="new">Newest</option>
+                <option value="old">Oldest</option>
+            </select>
+            <button type="submit">Search</button>
+        </form>
+        <form action="/" method="post">
+            <input type="text" name="name" placeholder="Your Name">
+            <textarea name="message" placeholder="Your Message" rows="10" cols="50"></textarea>
+            <button type="submit">Post</button>
+        </form>
+        <div id="posts">
+            {% for post in posts %}
+            <div class="post">
+                <h2><a href="{{ url_for('post_detail', post_id=post.id) }}" target="_blank">{{ post.name }}</a></h2>
+                <p><small>{{ post.time }}</small></p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
